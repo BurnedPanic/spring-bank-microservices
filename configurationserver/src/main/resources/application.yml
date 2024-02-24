@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+#    active: git
+    active: native
+  cloud:
+    config:
+      server:
+#        git:
+#          uri: https://github.com/eazybytes/microservices-config.git
+#          clone-on-start: false
+#          default-label: main
+        native:
+          search-location: classpath:/config
+#          search-location: file:///C://Users//mateu//OneDrive//Área de Trabalho//Udemy-Angular//micro_services//config
+
+server:
+  port: 8071

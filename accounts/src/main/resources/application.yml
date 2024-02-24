@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=Bank;trustServerCertificate=true;encrypt=false
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: admin#123
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  config:
+    import: vault://
+  application:
+    name: accounts
+  liquibase:
+    change-log: classpath:db/changelog-root.yaml
+    enabled: true
+    contexts: none
+  cloud:
+    vault:
+      scheme: http
+      kv:
+        enabled: true
+        backend: secret
+        default-context:
+      token: hvs.wzkEsK5oO1iENGdCfEl2uCgK
+
+
+  #    import: optional:configserver:http://localhost:8071/
+
+
+account: ${ACCOUNT}
+
+server:
+  port: 8080
+
+logging:
+  level:
+    java: debug
+    org.springframework.vault: trace
