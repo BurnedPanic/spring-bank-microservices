@@ -10,7 +10,8 @@ spring:
       ddl-auto: validate
     show-sql: true
   config:
-    import: vault://
+#    import: vault://
+    import: optional:configserver:http://localhost:8071/
   application:
     name: accounts
   liquibase:
@@ -25,12 +26,25 @@ spring:
         backend: secret
         default-context:
       token: hvs.wzkEsK5oO1iENGdCfEl2uCgK
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+accounts:
+#  account: ${ACCOUNT}
 
 
-  #    import: optional:configserver:http://localhost:8071/
+# Expose all actuator endpoints
+# For refreshing project properties the refresh endpoint must be exposed
+# For calling the RabbitMQ instance and sending an event to all connected instances the busrefresh endpoint must be exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
-
-account: ${ACCOUNT}
 
 server:
   port: 8080
@@ -38,4 +52,4 @@ server:
 logging:
   level:
     java: debug
-    org.springframework.vault: trace
+#    org.springframework.vault: trace

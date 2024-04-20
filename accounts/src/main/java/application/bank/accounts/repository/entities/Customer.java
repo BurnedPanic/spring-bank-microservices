@@ -1,6 +1,9 @@
 package application.bank.accounts.repository.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,7 +17,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Customer extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
     private Long customerId;
 

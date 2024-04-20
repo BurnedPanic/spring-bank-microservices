@@ -3,15 +3,11 @@ package application.bank.accounts.controller;
 import application.bank.accounts.config.AccountServiceConfig;
 import application.bank.accounts.controller.dto.CustomerDTO;
 import application.bank.accounts.service.AccountService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "CRUD REST API for Accounts")
 public class AccountsController {
 
-    @Value("${account}")
-    private String account;
+//    @Value("${account}")
+//    private String account;
 
     private final AccountService accountService;
     private final AccountServiceConfig accountServiceConfig;
@@ -60,11 +56,8 @@ public class AccountsController {
     }
 
     @GetMapping("/accounts/properties")
-    public String getPropertyDetails() throws JsonProcessingException {
-//        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-
-//        return ow.writeValueAsString(accountServiceConfig.toString());
-        return account;
+    public AccountServiceConfig getPropertyDetails() {
+        return accountServiceConfig;
     }
 
 }

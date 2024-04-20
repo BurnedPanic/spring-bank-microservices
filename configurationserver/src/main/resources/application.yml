@@ -9,11 +9,41 @@ spring:
       server:
 #        git:
 #          uri: https://github.com/eazybytes/microservices-config.git
-#          clone-on-start: false
+#          clone-on-start: true
 #          default-label: main
+#          timeout: 5
+#          force-pull: true
         native:
-          search-location: classpath:/config
-#          search-location: file:///C://Users//mateu//OneDrive//Área de Trabalho//Udemy-Angular//micro_services//config
+          search-locations: classpath:/config
+#          search-location: file:///C://Users//mateu//OneDrive//ï¿½rea de Trabalho//Udemy-Angular//micro_services//config
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+#https://hookdeck.com/docs/receive-webhooks website for testing GitHub Webhooks
+
+# Expose all actuator endpoints
+# For refreshing project properties the refresh endpoint must be exposed
+# For calling the RabbitMQ instance and sending an event to all connected instances the busrefresh endpoint must be exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+
+encrypt:
+  key: "ASDFASDFSDFAS65F5SD4F6A5S45SDF5D46AS5D4F"
 
 server:
   port: 8071

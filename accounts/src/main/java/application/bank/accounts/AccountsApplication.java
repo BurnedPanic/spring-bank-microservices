@@ -1,5 +1,6 @@
 package application.bank.accounts;
 
+import application.bank.accounts.config.AccountServiceConfig;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -36,7 +37,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
                 url = "http://localhost:8080/swagger-ui/index.html#/"
         )
 )
-@EnableConfigurationProperties
+@EnableConfigurationProperties({AccountServiceConfig.class})
 public class AccountsApplication {
 
     public static void main(String[] args) {
