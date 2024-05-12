@@ -1,16 +1,16 @@
 spring:
+  profiles:
+    active: prod
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=Bank;trustServerCertificate=true;encrypt=false
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
     password: admin#123
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: validate
     show-sql: true
   config:
-#    import: vault://
     import: optional:configserver:http://localhost:8071/
   application:
     name: accounts
@@ -18,21 +18,23 @@ spring:
     change-log: classpath:db/changelog-root.yaml
     enabled: true
     contexts: none
-  cloud:
-    vault:
-      scheme: http
-      kv:
-        enabled: true
-        backend: secret
-        default-context:
-      token: hvs.wzkEsK5oO1iENGdCfEl2uCgK
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  cloud:
+#    vault:
+#      scheme: http
+#      kv:
+#        enabled: true
+#        backend: secret
+#        default-context:
+#      token: hvs.wzkEsK5oO1iENGdCfEl2uCgK
 
-accounts:
+# Spring-cloud-amqp properties to connect to rabbitmq
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+#accounts:
 #  account: ${ACCOUNT}
 
 

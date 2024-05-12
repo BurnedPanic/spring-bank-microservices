@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 public class Loan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "loan_id")
     private Long id;
     private String mobileNumber;

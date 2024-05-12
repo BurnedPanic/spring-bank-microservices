@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "card_id")
     private int cardId;
     private String mobileNumber;

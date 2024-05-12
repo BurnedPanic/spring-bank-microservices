@@ -3,21 +3,41 @@ spring:
     name: Loans
   profiles:
     active: prod
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=Bank;trustServerCertificate=true;encrypt=false
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: admin#123
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
   config:
     import: optional:configserver:http://localhost:8071/
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  h2:
-    console:
-      enabled: true
+  liquibase:
+    change-log: classpath:db/changelog-root.yaml
+    enabled: true
+    contexts: none
+# Spring-cloud-amqp properties to connect to rabbitmq
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+# Expose all actuator endpoints
+# For refreshing project properties the refresh endpoint must be exposed
+# For calling the RabbitMQ instance and sending an event to all connected instances the busrefresh endpoint must be exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 server:
   port: 8090
+
+logging:
+  level:
+    java: debug
+#    org.springframework.vault: trace
