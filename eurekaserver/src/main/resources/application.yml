@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: "eurekaserver"
+  config:
+    import: optional:configserver:http://localhost:8071/
+
+# Expose all actuator endpoints
+# For refreshing project properties the refresh endpoint must be exposed
+# For calling the RabbitMQ instance and sending an event to all connected instances the busrefresh endpoint must be exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
