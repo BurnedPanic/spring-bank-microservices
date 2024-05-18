@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
-      file: releases/001_changelog_accounts.xml
+      file: releases/001_changelog_loans.xml

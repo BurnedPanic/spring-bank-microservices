@@ -16,6 +16,23 @@ services:
   microservice-configserver-config:
     extends:
       service: microservices-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_DATASOURCE_USERNAME: "sa"
+      SPRING_DATASOURCE_PASSWORD: "admin#123"
+      SPRING_DATASOURCE_URL: "jdbc:sqlserver://database:1433;databaseName=Bank;trustServerCertificate=true;encrypt=false"
+
+  microservice-configserver-eurekaserver-config:
+    extends:
+      service: microservice-configserver-config
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka

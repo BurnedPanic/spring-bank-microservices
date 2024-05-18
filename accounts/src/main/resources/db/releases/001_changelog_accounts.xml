@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
+        logicalFilePath="changeset1"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:pro="http://www.liquibase.org/xml/ns/pro"
@@ -29,7 +30,7 @@
             CREATE TABLE account
             (
                 customer_id    bigint       NOT NULL,
-                account_number bigint IDENTITY(1,1) PRIMARY KEY,
+                account_number bigint PRIMARY KEY,
                 account_type   varchar(100) NOT NULL,
                 branch_address varchar(200) NOT NULL,
                 created_at     datetime         NOT NULL,

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd ">
+    <changeSet author="Mateus Maia" id="01" context="none">
+        <sql>
+            CREATE TABLE card
+            (
+                card_id          int          NOT NULL PRIMARY KEY IDENTITY(1,1),
+                mobile_number    varchar(15)  NOT NULL,
+                card_number      varchar(100) NOT NULL,
+                card_type        varchar(100) NOT NULL,
+                total_limit      int          NOT NULL,
+                amount_used      int          NOT NULL,
+                available_amount int          NOT NULL,
+                created_at       datetime     NOT NULL,
+                created_by       varchar(20)  NOT NULL,
+                updated_at       datetime    DEFAULT NULL,
+                updated_by       varchar(20) DEFAULT NULL
+            );
+        </sql>
+        <rollback>
+            DROP TABLE card;
+        </rollback>
+    </changeSet>
+
+<!--    <changeSet author="Mateus Maia" id="02" context="none">
+        <sql>
+INSERT INTO card (card_number, customer_id, card_type, total_limit, amount_used, available_amount, create_dt)
+VALUES ('4565XXXX4656', 1, 'Credit', 10000, 500, 9500, CURDATE());
+
+INSERT INTO card (card_number, customer_id, card_type, total_limit, amount_used, available_amount, create_dt)
+VALUES ('3455XXXX8673', 1, 'Credit', 7500, 600, 6900, CURDATE());
+
+INSERT INTO card (card_number, customer_id, card_type, total_limit, amount_used, available_amount, create_dt)
+VALUES ('2359XXXX9346', 1, 'Credit', 20000, 4000, 16000, CURDATE());
+        </sql>
+        <rollback>
+            DROP TABLE account;
+        </rollback>
+    </changeSet>
+    -->
+    
+</databaseChangeLog>
