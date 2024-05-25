@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 @Validated
 public class LoansController {
+
+    Logger logger = LoggerFactory.getLogger(LoansController.class);
 
     private final LoanService loanService;
     private final LoansServiceConfig loansServiceConfig;
@@ -41,9 +45,12 @@ public class LoansController {
             description = "REST API to fetch loan details based on a mobile number"
     )
     @GetMapping("/fetch")
-    public LoanDTO fetchLoanDetails(@RequestParam
+    public LoanDTO fetchLoanDetails(@RequestHeader("burnedpanic-correlation-id") String correlationId,
+                                    @RequestParam
                                     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
                                     String mobileNumber) {
+        logger.debug("burnedpanic-correlation-id found: {}", correlationId);
+
         return loanService.getLoan(mobileNumber);
     }
 

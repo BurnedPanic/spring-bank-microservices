@@ -1,0 +1,48 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+  config:
+    import: optional:configserver:http://localhost:8071/
+  application:
+    name: gatewayserver
+
+# Expose all actuator endpoints
+# For refreshing project properties the refresh endpoint must be exposed
+# For calling the RabbitMQ instance and sending an event to all connected instances the busrefresh endpoint must be exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka
+
+info:
+  app:
+    name: gatewayserver
+    description: "Eazy Bank Edge Server Application"
+    version: "1.0.0"
+
+server:
+  port: 8072
+
+logging:
+  level:
+    root: debug

@@ -29,15 +29,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public CustomerDetailsDTO fetchCustomerDetails(String mobileNumber) {
+    public CustomerDetailsDTO fetchCustomerDetails(String mobileNumber, String correlationId) {
         Customer customer = customerRepository.findCustomerByMobileNumber(mobileNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
 
         Account account = accountRepository.findByCustomerId(customer.getCustomerId())
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "customerId", String.valueOf(customer.getCustomerId())));
 
-        LoanDTO loanDTO = loansProxy.fetchLoanDetails(mobileNumber).getBody();
-        CardDTO cardDTO = cardsProxy.fetchCardDetails(mobileNumber).getBody();
+        LoanDTO loanDTO = loansProxy.fetchLoanDetails(mobileNumber, correlationId).getBody();
+        CardDTO cardDTO = cardsProxy.fetchCardDetails(mobileNumber, correlationId).getBody();
 
         return customerMapper.mapToCustomerDetailsDTO(
                 customerMapper.mapToCustomerDTO(customer, account),

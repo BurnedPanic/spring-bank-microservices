@@ -77,6 +77,6 @@ server:
 
 logging:
   level:
-    java: debug
+    root: debug
 
 #    org.springframework.vault: trace

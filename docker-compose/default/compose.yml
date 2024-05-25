@@ -70,6 +70,18 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
+  gatewayserver:
+    image: burnedpanic/gatewayserver:latest
+    container_name: gatewayserver
+    ports:
+      - "8072:8072"
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-eurekaserver-config
+
+
   account:
     image: burnedpanic/accounts:latest
     container_name: accounts
